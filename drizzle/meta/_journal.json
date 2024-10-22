@@ -15,6 +15,13 @@
       "when": 1729367458405,
       "tag": "0001_redundant_lester",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729549985170,
+      "tag": "0002_lowly_scream",
+      "breakpoints": true
     }
   ]
 }

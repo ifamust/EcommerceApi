@@ -9,7 +9,7 @@ export function validateRequest(schema: z.ZodObject<any, any>) {
       schema.parse(req.body);
 
       //only allows the keys from Schema to be valid
-      req.cleanBody = _.pick(req.body, Object.keys(productSchemaCreate.shape));
+      req.cleanBody = _.pick(req.body, Object.keys(schema.shape));
 
       next();
     } catch (error) {

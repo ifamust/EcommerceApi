@@ -32,6 +32,7 @@ export async function getProductById(
 
     if (!product) {
       res.status(404).send({ message: 'Product not found' });
+      return;
     }
 
     res.json(product);
@@ -74,6 +75,7 @@ export async function updateProduct(
 
     if (!product) {
       res.status(404).send({ message: 'Product not Found' });
+      return;
     }
 
     res.status(200).json({ message: 'Successfully updated', product });
@@ -97,6 +99,7 @@ export async function deleteProduct(
 
     if (!deleted) {
       res.status(404).send({ message: 'Product not Found' });
+      return;
     }
 
     res.status(204).json({ message: 'Successfully deleted', deleted });
