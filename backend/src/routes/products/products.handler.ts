@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import { productsTable } from '../../db/productsSchema';
-import { db } from '../../db';
 import { eq } from 'drizzle-orm';
+import { Request, Response, NextFunction } from 'express';
+import { productsTable } from '../../db/productsSchema.js';
+import { db } from '../../db/index.js';
 
 export async function listProducts(
   req: Request,

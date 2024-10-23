@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
-import { db } from '../../db';
-import { usersTable } from '../../db/usersSchema';
 import { eq } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
-
+import { db } from '../../db/index.js';
+import { usersTable } from '../../db/usersSchema.js';
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const { email, password } = req.cleanBody;

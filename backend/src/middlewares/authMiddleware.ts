@@ -1,9 +1,7 @@
 import _ from 'lodash';
 import jwt from 'jsonwebtoken';
-import { z, ZodError } from 'zod';
-import { productSchemaCreate } from '../db/productsSchema';
 import { Request, Response, NextFunction } from 'express';
-import { JwtAuth } from '../types/global';
+import { JwtAuth } from '../types/global.js';
 
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
   const token = req.header('Authorization');
