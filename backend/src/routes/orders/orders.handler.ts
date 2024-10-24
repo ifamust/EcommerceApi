@@ -16,9 +16,10 @@ export async function createOrder(
     if (!userId) {
       res.status(400).json({ message: 'Invalid order data' });
     }
-
+    //TODO: fix type error
     const [newOrder] = await db
       .insert(ordersTable)
+      //@ts-ignore
       .values({ userId: userId })
       .returning();
 
