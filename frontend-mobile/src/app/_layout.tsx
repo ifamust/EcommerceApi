@@ -1,5 +1,25 @@
+import '@/global.css';
 import { Stack } from 'expo-router';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import { StyleSheet, View } from 'react-native';
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <GluestackUIProvider mode='light'>
+      <Stack>
+        <Stack.Screen
+          name='index'
+          options={{
+            title: 'Shop',
+          }}
+        />
+        <Stack.Screen
+          name='product/[id]'
+          options={{
+            title: 'Product',
+          }}
+        />
+      </Stack>
+    </GluestackUIProvider>
+  );
 }
