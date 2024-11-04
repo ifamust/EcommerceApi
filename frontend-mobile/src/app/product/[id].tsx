@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { Stack, useLocalSearchParams } from 'expo-router';
 
 import { Card } from '@/components/ui/card';
@@ -9,17 +9,34 @@ import { Heading } from '@/components/ui/heading';
 import { Box } from '@/components/ui/box';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { useQuery } from '@tanstack/react-query';
 
-import products from '@/assets/products.json';
+import { fetchProductsById } from '@/api/products';
+import { useCart } from '@/store/cartStore';
 
 const details = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const addProduct = useCart((state) => state.addProduct);
 
-  const product = products.find((prod) => prod.id === Number(id));
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => fetchProductsById(Number(id)),
+  });
 
-  if (!product) {
-    return <Text> Product not found.</Text>;
+  if (isLoading) {
+    return <ActivityIndicator />;
   }
+  if (error) {
+    return <Text> Product not found</Text>;
+  }
+
+  const addToCart = () => {
+    addProduct(product);
+  };
 
   return (
     <Card className='flex-1 p-5 rounded-lg '>
@@ -42,7 +59,10 @@ const details = () => {
         <Text size='sm'>{product.description}</Text>
       </VStack>
       <Box className='flex-col sm:flex-row'>
-        <Button className='px-4 py-2 mr-0 mb-3 sm:mr-3 sm:mb-0 sm:flex-1'>
+        <Button
+          onPress={addToCart}
+          className='px-4 py-2 mr-0 mb-3 sm:mr-3 sm:mb-0 sm:flex-1'
+        >
           <ButtonText size='sm'>Add to cart</ButtonText>
         </Button>
       </Box>
